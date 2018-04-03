@@ -1,0 +1,62 @@
+<%= form_with url: deals_deal_imports_path, :html => { :class => "form-horizontal deal_import" }, remote: true do |f| %>
+  <% pipeline_name = session['pipeline'].present? ? session['pipeline']['name'] : nil %>
+  <% owner_name = session['owner'].present? ? session['owner']['name'] : nil %>
+
+  <div class="form-group">
+    <%= label_tag :pipeline, "Pipeline", :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= 
+        f.select(
+          :pipeline,
+          @pipelines.map.with_index { |pipeline| [pipeline['name'], pipeline.to_json] },
+          {
+            selected: pipeline_name || false,
+            include_blank: 'Select Pipeline'
+          },
+          { class: 'form-control pipeline_select', required: true }
+        ) 
+      %>
+    </div>
+    <%=f.error_span(:pipeline) %>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag :owner, "Owner", :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= 
+        f.select(
+          :owner,
+          @owners.map { |owner| [owner['name'], owner.to_json] },
+          { 
+            selected: owner_name || false,
+            include_blank: 'Select Owner'
+          },
+          { class: 'form-control owner_select', required: true }
+        )
+      %>
+    </div>
+    <%=f.error_span(:owner) %>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit "Fetch Deals", :class => 'btn btn-primary' %>
+    </div>
+  </div>
+
+<% end %>
+
+<script>
+  var pipeline_selected = false;
+  var owner_selected = false;
+  $('.pipeline_select').on('change', function(){
+    pipeline_selected = $('.pipeline_select').val() != ""
+    if(pipeline_selected && owner_selected){
+
+    }
+  })
+
+  $('.owner_select').on('change', function(){
+    owner_selected = $('.owner_select').val() != ""
+  })
+</script>

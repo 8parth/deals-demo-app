@@ -1,0 +1,23 @@
+<% if @pipedrive_token.present? %>
+ <% form_for_method = :delete %>
+ <% submit_button_name = 'Disconnect' %>
+<% else %>
+  <% form_for_method = :post %>
+  <% submit_button_name = 'Connect' %>
+<% end %>
+
+<%= form_with url: pipedrive_tokens_path, method: form_for_method, :html => { :class => "form-horizontal pipedrive_token_form" }, remote: true do |f| %>
+  <div class="form-group">
+    <%= f.label_tag :token, "Pipedrive Token", :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :token, value: @pipedrive_token, class: 'form-control', required: true %>
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-2">
+      <%= f.submit submit_button_name, :class => 'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>

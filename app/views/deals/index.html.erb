@@ -1,0 +1,15 @@
+<div class="page-header">
+  <h3>New Deal</h3>
+</div>
+
+<div class="deal_form">
+  <%= render :partial => 'form' %>
+</div>
+
+<div class="import_deals">
+  <%= link_to 'Import Deals', deal_imports_path, class: 'btn btn-success' %>
+</div>
+
+<div class="deal_listing_table">
+  <%= render :partial => 'deal_listing' %>
+</div>

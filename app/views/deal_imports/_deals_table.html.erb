@@ -1,0 +1,40 @@
+<%= form_with url: deal_imports_path, method: :post, :html => { :class => "form-horizontal deal_import" }, remote: true do |f| %>
+
+<table class="table table-striped">
+  <caption>Deals (For the Salesman Above):</caption>
+  <thead class="thead-dark">
+    <tr>
+      <th>Select Deal</th>
+      <th>Customer</th>
+      <th>Title</th>
+      <th>Value</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @pipedrive_deals.present? %>
+      <% @pipedrive_deals.each do |deal_hash| %>
+        <tr>
+          <td>
+            <div class="form-check">
+              <%= f.check_box 'pipedrive_deals', { multiple: true }, deal_hash['id'], nil %>              
+            </div>
+          </td>
+          <td><%= deal_hash['org_name'] %></td>
+          <td><%= deal_hash['title'] %></td>
+          <td><%= deal_hash['value'] %></td>
+          <td><%= deal_hash['status'] %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="form-group">
+  <div class="col-lg-10">
+    <%= f.submit 'Import All Selected Deals', class: 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                deal_imports_path, :class => 'btn btn-default' %>
+  </div>
+</div>
+<% end %>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AvaliacaoRailsDeveloper</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <!-- flash messages -->
+    <div class="container flash_message">
+      <%= render partial: 'shared/flash_messages' %>
+    </div>
+    <!-- navbar -->
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <%= link_to 'AvaliacaoRailsDeveloper', root_path, class: "navbar-brand" %>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <% if user_signed_in? %>
+                <%= link_to 'Log Out', destroy_user_session_path, method: :delete, class: 'btn btn-danger', style: 'color: white;' %>
+              <% else %>
+                <%= link_to 'Log In', new_user_session_path, class: 'btn btn-success', style: 'color: white;' %>
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- body -->
+    <div class="container-fluid">
+      <%= yield %>
+    </div>
+  </body>
+</html>

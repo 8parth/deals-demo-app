@@ -1,0 +1,64 @@
+<%- model_class = Deal -%>
+<div class="page-header">
+  <h3>Deal Listing</h3>
+</div>
+<%= search_form_for @q, :html => { :class => "form-inline" }, remote: true do |f| %>
+
+  <div class="form-group">
+    <%= f.label :search, :class => 'sr-only' %>
+    <%= f.search_field :title_or_customer_cont, :class => 'form-control' %>
+  </div>
+  
+  <%= f.submit nil, class: 'btn btn-primary' %>
+<% end %>
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th><%= sort_link(@q, :id, model_class.human_attribute_name(:id), {}, { :remote => true, method: :get }) %></th>
+        <th><%= sort_link(@q, :customer, model_class.human_attribute_name(:customer), {}, { remote: true, method: :get }) %></th>
+        <th><%= sort_link(@q, :title, model_class.human_attribute_name(:title), {}, { remote: true, method: :get }) %></th>
+        <th><%= sort_link(@q, :status, model_class.human_attribute_name(:status), {}, { remote: true, method: :get }) %></th>
+        <th><%= sort_link(@q, :expected_closing_date, model_class.human_attribute_name(:expected_closing_date), {}, { remote: true, method: :get }) %></th>
+        <th><%= sort_link(@q, :value, model_class.human_attribute_name(:value), {}, { remote: true, method: :get }) %></th>        
+        <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if @deals.present? %>
+      <% @deals.each do |deal| %>
+        <tr>
+          <td><%= link_to deal.id, deal_path(deal) %></td>
+          <td><%= deal.customer %></td>
+          <td><%= deal.title %></td>
+          <td><%= deal.status %></td>
+          <td><%= deal.expected_closing_date %></td>          
+          <td><%= "#{deal.value} $" %></td>
+          <td>
+            <%= link_to t('.show', :default => t("helpers.links.show")),
+                        deal_path(deal), :class => 'btn btn-default btn-xs' %>
+            <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                        edit_deal_path(deal), :class => 'btn btn-default btn-xs' %>
+            <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                        deal_path(deal),
+                        :method => :delete,
+                        remote: true,
+                        :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                        :class => 'btn btn-xs btn-danger' %>
+            <%= link_to t('.won', default: t('helpers.links.won')),
+                        deal_path(deal, deal: { status: :won } ),
+                        method: :put,
+                        remote: true,
+                        class: 'btn btn-xs btn-success' %>
+            <%= link_to t('.lost', default: t('helpers.links.lost')),
+                        deal_path(deal, deal: { status: :lost } ),
+                        method: :put,
+                        remote: true,
+                        class: 'btn btn-xs btn-danger' %>
+          </td>
+        </tr>
+      <% end %>
+      <% end %>
+    </tbody>
+  </table>
+  <%= paginate @deals, remote: true %>

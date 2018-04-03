@@ -1,0 +1,64 @@
+<%= form_for @deal, :html => { :class => "form-horizontal deal deal_form_for" }, remote: true do |f| %>
+
+  <% if @deal.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@deal.errors.count, "error") %> prohibited this deal from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @deal.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :created_by_id, value: @deal.created_by_id %>
+
+  <div class="form-group">
+    <%= f.label :customer, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :customer, :class => 'form-control', required: true %>
+    </div>
+    <%=f.error_span(:customer) %> 
+  </div>
+  <div class="form-group">
+    <%= f.label :title, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :title, :class => 'form-control', required: true %>
+    </div>
+    <%=f.error_span(:customer) %> 
+  </div>
+  <div class="form-group">
+    <%= f.label :status, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :status, Deal.statuses.keys.map{ |key| [key.humanize, key] }, :class => 'form-control', required: true %>
+    </div>
+    <%=f.error_span(:status) %> 
+  </div>
+  <div class="form-group">
+    <%= f.label :value, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.number_field :value, :class => 'form-control', required: true, min: 1, max: 9999999 %>
+    </div>
+    <%=f.error_span(:value) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :expected_closing_date, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.date_field :expected_closing_date, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:expected_closing_date) %>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                deals_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>
