@@ -49,11 +49,13 @@
                         deal_path(deal, deal: { status: :won } ),
                         method: :put,
                         remote: true,
+                        disabled: deal.status == 'won',
                         class: 'btn btn-xs btn-success' %>
             <%= link_to t('.lost', default: t('helpers.links.lost')),
                         deal_path(deal, deal: { status: :lost } ),
                         method: :put,
                         remote: true,
+                        disabled: deal.status == 'lost',
                         class: 'btn btn-xs btn-danger' %>
           </td>
         </tr>
