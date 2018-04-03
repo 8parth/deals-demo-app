@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>AvaliacaoRailsDeveloper</title>
+    <title>Demo App</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
@@ -21,15 +21,17 @@
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <%= link_to 'AvaliacaoRailsDeveloper', root_path, class: "navbar-brand" %>
+          <%= link_to 'Demo App', root_path, class: "navbar-brand" %>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li>
               <% if user_signed_in? %>
                 <%= link_to 'Log Out', destroy_user_session_path, method: :delete, class: 'btn btn-danger', style: 'color: white;' %>
+              <% elsif controller_name != 'registrations' %>
+                <%= link_to 'Sign Up', new_registration_path(resource_name), class: 'btn btn-success', style: 'color: white;' %>
               <% else %>
-                <%= link_to 'Log In', new_user_session_path, class: 'btn btn-success', style: 'color: white;' %>
+                <%= link_to 'Log In', new_session_path(resource_name), class: 'btn btn-success', style: 'color: white;' %>
               <% end %>
             </li>
           </ul>
