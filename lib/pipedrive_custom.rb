@@ -31,7 +31,7 @@ class PipedriveCustom
   end
 
   def owners
-    api_path = '/persons'
+    api_path = '/users'
     @resp = self.class.get(api_path, default_request_data)
     resp_parsing
   end
