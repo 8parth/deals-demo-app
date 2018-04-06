@@ -1,3 +1,9 @@
+# Fetches deals from pipedrive for given user by using token, deal_ids and current user's ID.
+# The deals are then stored into database by extracting values from pipedrive deals response.
+# Response is wrapped inside `SuccessResponse` and `ErrorResponse` service objects, which gives `success?` to check whether request made was successful.
+# Example:
+# resp = ImportPipedriveDeal.new('validtoken', [1,2,3], 1).call
+# resp.success?
 class ImportPipedriveDeal
   attr_reader :token, :deal_ids, :deals_array
   def initialize(token, pipedrive_deal_ids, user_id)

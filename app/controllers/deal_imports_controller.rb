@@ -6,6 +6,8 @@ class DealImportsController < ApplicationController
     set_pipelines_and_owners
   end
 
+  # lists deals for selecteed dropdown combos.
+  # Sets values recieved from pipeline and owner dropdown combobox.
   def deals
     session[:pipeline] = JSON.parse(params[:pipeline]).except('selected')
     session[:owner] = JSON.parse(params[:owner]).except('selected')
@@ -19,6 +21,8 @@ class DealImportsController < ApplicationController
     end
   end
 
+  # uses pipedrive token and deal ids to fetch and store information of deals from pipedrive to application database.
+  # Token and deal ids are fetched from session.
   def create
     resp = ImportPipedriveDeal.new(session[:pipedrive_token], params[:pipedrive_deals], current_user.id).call
     if resp.success?

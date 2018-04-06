@@ -1,6 +1,7 @@
 class PipedriveTokensController < ApplicationController
   before_action :authenticate_user!
 
+  # Connects to pipedrive and stores the token in session.
   def create
     connection_information = PipedriveCustom.new(token_params[:token]).connection_information
 
@@ -18,6 +19,7 @@ class PipedriveTokensController < ApplicationController
     end
   end
 
+  # Removes the token from session.
   def destroy
     session[:pipedrive_token] = nil
     @pipedrive_token = nil

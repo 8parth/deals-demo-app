@@ -1,3 +1,5 @@
+# Wraps data with `success?` method which returns false.
+# Data is wrapped inside SuccessResponse when request / operation performed was unsuccessful.
 class ErrorResponse
   attr_reader :errors, :error_code, :record
   def initialize(errors, error_code = nil, record = nil)
