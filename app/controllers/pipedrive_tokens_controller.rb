@@ -13,6 +13,9 @@ class PipedriveTokensController < ApplicationController
         format.js { flash.now[:notice] = 'Connected to Pipedrive successfully!' }
       end
     else
+      session[:pipedrive_token] = nil
+      @pipedrive_token = nil
+      list_empty_pipelines_and_owners
       respond_to do |format|
         format.js { flash.now[:error] = 'Could not connect to Pipedrive.' }
       end
