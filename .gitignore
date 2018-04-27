@@ -18,3 +18,5 @@
 
 .byebug_history
 .env
+.ufo/output
+.ufo/data
