@@ -30,5 +30,5 @@ ENV APPNAME deals_app
 EXPOSE 3000
 
 ENTRYPOINT [ "docker/entrypoint.sh" ]
-CMD [ "bundle", "exec", "rails", "server" ]
+CMD [ "bundle", "exec", "rails", "server", "-p", "3000" ]
 # CMD [ "bundle", "exec", "rails", "server", "-p", "3000", "-b", "0.0.0.0" ]
