@@ -42,6 +42,7 @@ gem 'httparty'
 # search, sort, pagination 
 gem 'ransack'
 gem 'kaminari'
+gem 'aws-healthcheck'
 
 group :development, :test do
   gem 'pry'
