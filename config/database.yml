@@ -80,6 +80,4 @@ test:
 #
 production:
   <<: *default
-  database: avaliacao_rails_developer_production
-  username: avaliacao_rails_developer
-  password: <%= ENV['AVALIACAO_RAILS_DEVELOPER_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
