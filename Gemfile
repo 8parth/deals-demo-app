@@ -60,6 +60,14 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'capistrano', '~> 3.11', require: false
+  gem 'capistrano-rails', '~> 1.3', require: false
+  gem 'capistrano3-puma', require: false
+  gem 'capistrano-rbenv', '~> 2.1', require: false
+  gem 'capistrano-bundler', '~> 1.3', require: false
+  gem 'capistrano-resque', '~> 0.2.2', require: false
+  gem 'aws-sdk', '~> 3.0'
+  gem 'aws-sdk-ec2', '~> 1'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
